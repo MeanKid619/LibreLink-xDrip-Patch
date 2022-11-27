@@ -180,7 +180,7 @@ else
   exit 1
 fi
 
-if [ ! -f tools/libre-keystore.p12 ]; then
+if [ ! -f tools/pontomedon.jks ]; then
   echo -e "${WHITE}Erstelle Keystore zum Signieren der gepatchten APK Datei ...${NORMAL}"
   keytool -genkey -v -keystore tools/libre-keystore.p12 -storetype PKCS12 -alias "Libre Signer" -keyalg RSA -keysize 2048 --validity 10000 --storepass geheim --keypass geheim -dname "cn=Libre Signer, c=de"
   if [ $? = 0 ]; then
@@ -198,11 +198,11 @@ fi
 
 echo -e "${WHITE}Signiere gepatchte APK Datei ...${NORMAL}"
 if [ -x /usr/lib/android-sdk/build-tools/debian/apksigner.jar ]; then
-  java -jar /usr/lib/android-sdk/build-tools/debian/apksigner.jar sign --ks-pass pass:geheim --ks tools/libre-keystore.p12 APK/${FILENAME}_patched.apk
+  java -jar /usr/lib/android-sdk/build-tools/debian/apksigner.jar sign --ks tools/pontomedon.jks --ks-pass env:KEYSTORE_PASS --ks-key-alias AndroidAPS --key-pass env:KEY_PASS APK/${FILENAME}_patched.apk
 elif [ -x /usr/share/apksigner/apksigner.jar ]; then
-  java -jar /usr/share/apksigner/apksigner.jar sign --ks-pass pass:geheim --ks tools/libre-keystore.p12 APK/${FILENAME}_patched.apk
+  java -jar /usr/share/apksigner/apksigner.jar sign --ks tools/pontomedon.jks --ks-pass env:KEYSTORE_PASS --ks-key-alias AndroidAPS --key-pass env:KEY_PASS APK/${FILENAME}_patched.apk
 else
-  apksigner sign --ks-pass pass:geheim --ks tools/libre-keystore.p12 APK/${FILENAME}_patched.apk
+  apksigner sign --ks tools/pontomedon.jks --ks-pass env:KEYSTORE_PASS --ks-key-alias AndroidAPS --key-pass env:KEY_PASS APK/${FILENAME}_patched.apk
 fi
 if [ $? = 0 ]; then
   echo -e "${GREEN}  okay.${NORMAL}"
