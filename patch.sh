@@ -8,7 +8,7 @@ WHITE='\033[1;37m'
 YELLOW='\033[1;33m'
 
 WORKDIR=$(pwd)
-FILENAME='com.freestylelibre.app.de_2019-04-22'
+FILENAME='com.freestylelibre.app.de_2020-02-15'
 
 echo -e "${WHITE}Prüfe benötigte Tools ...${NORMAL}"
 MISSINGTOOL=0
@@ -71,7 +71,7 @@ if [ -e APK/${FILENAME}.apk ]; then
 else
   echo -e "${RED}  nicht gefunden.${NORMAL}"
   echo
-  echo -e "${YELLOW}=> Bitte laden Sie die original APK Datei von https://www.apkmonk.com/download-app/com.freestylelibre.app.de/5_com.freestylelibre.app.de_2019-04-22.apk/ herunter und legen Sie sie im Verzeichnis APK/ ab.${NORMAL}"
+  echo -e "${YELLOW}=> Bitte laden Sie die original APK Datei von https://www.apkmonk.com/download-app/com.freestylelibre.app.de/5_com.freestylelibre.app.de_2020-02-15.apk herunter und legen Sie sie im Verzeichnis APK/ ab.${NORMAL}"
   exit 1
 fi
 
